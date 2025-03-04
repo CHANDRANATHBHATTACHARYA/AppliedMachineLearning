@@ -1,0 +1,124 @@
+PS C:\Users\INDRA> cd 'C:\Users\INDRA\Desktop\CMI MSC DATA SCIENCE\Applied Machine Learning\Assignment2'
+PS C:\Users\INDRA\Desktop\CMI MSC DATA SCIENCE\Applied Machine Learning\Assignment2> python -m dvc init
+>>
+Initialized DVC repository.
+
+You can now commit the changes to git.
+
++---------------------------------------------------------------------+
+|                                                                     |
+|     Read the analytics documentation (and how to opt-out) here:     |
+|             <https://dvc.org/doc/user-guide/analytics>              |
+|                                                                     |
++---------------------------------------------------------------------+
+
+What's next?
+------------
+- Check out the documentation: <https://dvc.org/doc>
+- Get help and share ideas: <https://dvc.org/chat>
+- Star us on GitHub: <https://github.com/iterative/dvc>
+PS C:\Users\INDRA\Desktop\CMI MSC DATA SCIENCE\Applied Machine Learning\Assignment2> python -m dvc add train.csv validation.csv test.csv
+100% Adding...|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████|3/3 [00:00,  6.55file/s] 
+
+To track the changes with git, run:
+
+        git add validation.csv.dvc train.csv.dvc test.csv.dvc .gitignore
+
+To enable auto staging, run:
+
+        dvc config core.autostage true
+PS C:\Users\INDRA\Desktop\CMI MSC DATA SCIENCE\Applied Machine Learning\Assignment2> git add .dvc config train.csv.dvc validation.csv.dvc test.csv.dvc
+>> git commit -m "Track data splits with DVC"
+>> 
+fatal: pathspec 'config' did not match any files
+HEAD detached at v1
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   .gitignore
+        modified:   test.csv.dvc
+        modified:   train.csv.dvc
+        modified:   validation.csv.dvc
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        SMSSpamCollection
+        prepare.ipynb
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS C:\Users\INDRA\Desktop\CMI MSC DATA SCIENCE\Applied Machine Learning\Assignment2> mkdir dvc-storage
+
+
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+
+
+PS C:\Users\INDRA\Desktop\CMI MSC DATA SCIENCE\Applied Machine Learning\Assignment2> python -m dvc remote add -d myremote ./dvc-storage
+>>
+Setting 'myremote' as a default remote.
+PS C:\Users\INDRA\Desktop\CMI MSC DATA SCIENCE\Applied Machine Learning\Assignment2> python -m dvc push
+>>
+Collecting                                                                                                                                                  |3.00 [00:00,  103entry/s] 
+Pushing
+3 files pushed
+PS C:\Users\INDRA\Desktop\CMI MSC DATA SCIENCE\Applied Machine Learning\Assignment2> python -m dvc add train.csv validation.csv test.csv
+100% Adding...|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████|3/3 [00:00, 11.81file/s] 
+
+To track the changes with git, run:
+
+        git add validation.csv.dvc test.csv.dvc train.csv.dvc
+
+To enable auto staging, run:
+
+        dvc config core.autostage true
+PS C:\Users\INDRA\Desktop\CMI MSC DATA SCIENCE\Applied Machine Learning\Assignment2> git add .dvc config train.csv.dvc validation.csv.dvc test.csv.dvc
+>> git commit -m "Track data splits with DVC"
+>> 
+fatal: pathspec 'config' did not match any files
+HEAD detached at v1
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   .dvc/config
+        modified:   .gitignore
+        deleted:    raw_data.csv.dvc
+        modified:   train.csv.dvc
+        modified:   validation.csv.dvc
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        SMSSpamCollection
+        dvc-storage/
+        prepare.ipynb
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS C:\Users\INDRA\Desktop\CMI MSC DATA SCIENCE\Applied Machine Learning\Assignment2> git tag v1
+fatal: tag 'v1' already exists
+PS C:\Users\INDRA\Desktop\CMI MSC DATA SCIENCE\Applied Machine Learning\Assignment2> git checkout v1
+>>
+HEAD is now at e98beed Updated train, validation, and test split with random_state=99
+M       .dvc/config
+D       raw_data.csv.dvc
+M       test.csv.dvc
+M       train.csv.dvc
+M       validation.csv.dvc
+PS C:\Users\INDRA\Desktop\CMI MSC DATA SCIENCE\Applied Machine Learning\Assignment2> python -m dvc checkout
+>>
+Building workspace index                                                                                                                                    |3.00 [00:00, 47.8entry/s] 
+Comparing indexes                                                                                                                                           |4.00 [00:00,  846entry/s] 
+Applying changes                                                                                                                                            |0.00 [00:00,     ?file/s] 
+PS C:\Users\INDRA\Desktop\CMI MSC DATA SCIENCE\Applied Machine Learning\Assignment2> git checkout main  # Or the branch where the updated data is saved
+>> python -m dvc checkout
+>>
+Switched to branch 'main'
+M       .dvc/config
+M       .gitignore
+D       raw_data.csv.dvc
+M       test.csv.dvc
+M       train.csv.dvc
+M       validation.csv.dvc
+Building workspace index                                                                                                                                    |3.00 [00:00, 89.3entry/s]
+Comparing indexes                                                                                                                                          |4.00 [00:00, 1.03kentry/s] 
+Applying changes                                                                                                                                            |0.00 [00:00,     ?file/s]
+PS C:\Users\INDRA\Desktop\CMI MSC DATA SCIENCE\Applied Machine Learning\Assignment2> 

@@ -43,7 +43,7 @@ def test_flask():
     flask_process = subprocess.Popen(
         ["python", "app.py", "--host", "127.0.0.1", "--port", "5000"]
     )
-    time.sleep(3)  # Increased wait time
+    time.sleep(3)  
     
     try:
         response = requests.post(

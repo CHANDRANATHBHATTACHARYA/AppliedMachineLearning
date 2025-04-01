@@ -1,0 +1,5 @@
+outs:
+- md5: b7f44006541fb6f3e936e671f3fd94b6
+  size: 486480
+  hash: md5
+  path: SMSSpamCollection.csv

@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# -----------------------------------------
+# Pre-commit hook script for running tests
+# -----------------------------------------
+
+# Run the test suite (test.py must handle logging results to test_results.txt)
+if python "Assignment 4/test.py"; then
+    # If tests pass, proceed with the commit
+
+    echo "Tests passed. Committing changes..."
+
+    # Stage the test_results.txt file for commit
+    git add "Assignment 4/test_results.txt"
+
+    # Commit with a standard message, skipping this pre-commit hook to avoid loops
+    git commit --no-verify -m "Add test results"
+else
+    # If any test fails, abort the commit
+
+    echo "Tests failed. Commit aborted."
+    exit 1
+fi
+
+
+
+Note : This is just the .txt file for pre-commit that is created as .githooks/pre-commit.
